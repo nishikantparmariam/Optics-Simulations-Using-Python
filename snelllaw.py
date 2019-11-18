@@ -11,15 +11,16 @@ def snelllaw():
 
     
     win_height = 700
-    win_width =700
+    win_width = 700
     slab_height = 400
     slab_width = 200
     t = 2 #thickness of border    
     incident_point_y = (win_width-slab_width)//2
-    incident_point_x = (win_height-slab_height)//2+75
-    
+    incident_point_x = (win_height-slab_height)//2+75    
     flag = 1    
     while(True):        
+        refraction_angle = math.asin((u_env/u_slab)*math.sin(incidence_angle))
+        lateral_shift = (slab_width)*(math.sin(incidence_angle-refraction_angle)/math.cos(refraction_angle))
         #img = cv2.line(img,(0,0),(511,511),(255,0,0),5)  
         img = np.zeros((win_height,win_width,3), np.uint8)
         #normal to incidence
@@ -41,11 +42,12 @@ def snelllaw():
         cv2.putText(img, "Refractive Index 2 : "+str(u_slab), (win_width-220,45), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
         cv2.putText(img, "Incident Angle : "+str(round((incidence_angle*180)/(math.pi))), (win_width-220,65), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
         cv2.putText(img, "Refraction Angle : "+str(round((refraction_angle*180)/(math.pi))), (win_width-220,85), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
+        cv2.putText(img, "Lateral Shift : "+str(round(lateral_shift))+" pixels", (win_width-220,105), font, 0.5, (255, 255, 255), 1, cv2.LINE_AA)        
         cv2.putText(img, "Snell's Law", (25,win_height-25), font, 1, (255, 255, 255), 1, cv2.LINE_AA)
         if flag:
             incidence_angle+=0.005 
         else:
-             incidence_angle-=0.005 
+             incidence_angle-=0.005
         refraction_angle = math.asin((u_env/u_slab)*math.sin(incidence_angle))
         if incidence_angle>1.48353 or incidence_angle<0 or incident_point_x+round(slab_width*math.tan(refraction_angle)) + 75> (win_height+slab_height)//2:
             flag^=1          
