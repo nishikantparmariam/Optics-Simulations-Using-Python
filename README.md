@@ -6,10 +6,10 @@ This project was a part of PH102 course offered by IIT Gandhinagar in the year 2
 
 Team Members - 
 
-Aishna Agarwal 
-Aditya Pusalkar 
-Ameya Kulkarni 
-Nishikant Parmar 
-Raghav Goyal 
+Aishna Agarwal |  
+Aditya Pusalkar | 
+Ameya Kulkarni | 
+Nishikant Parmar | 
+Raghav Goyal | 
 Sachin Yadav 
 
